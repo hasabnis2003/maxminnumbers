@@ -1,0 +1,76 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MaxMinFinder {
+    
+    // Method to find the maximum number in the list
+    public static int findMax(ArrayList<Integer> numbers) {
+        int max = numbers.get(0);
+        for (int number : numbers) {
+            if (number > max) {
+                max = number;
+            }
+        }
+        return max;
+    }
+
+    // Method to find the minimum number in the list
+    public static int findMin(ArrayList<Integer> numbers) {
+        int min = numbers.get(0);
+        for (int number : numbers) {
+            if (number < min) {
+                min = number;
+            }
+        }
+        return min;
+    }
+
+    // Method to validate user input
+    public static boolean isValidInput(String input) {
+        try {
+            Integer.parseInt(input); // Try to parse the string to an integer
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    // Main method to run the program
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> numbers = new ArrayList<>();
+        
+        System.out.println("Welcome to the Max-Min Finder Program!");
+        System.out.println("Please enter numbers one by one. Type 'done' when you're finished.");
+        
+        while (true) {
+            System.out.print("Enter a number: ");
+            String input = scanner.nextLine();
+            
+            // Check if the user wants to stop entering numbers
+            if (input.equalsIgnoreCase("done")) {
+                break;
+            }
+
+            // Validate the input
+            if (isValidInput(input)) {
+                numbers.add(Integer.parseInt(input)); // Add valid input to the list
+            } else {
+                System.out.println("Invalid input! Please enter a valid number.");
+            }
+        }
+
+        // Check if the list is empty
+        if (numbers.isEmpty()) {
+            System.out.println("No numbers were entered.");
+        } else {
+            int max = findMax(numbers);
+            int min = findMin(numbers);
+            
+            System.out.println("The maximum value is: " + max);
+            System.out.println("The minimum value is: " + min);
+        }
+
+        scanner.close();
+    }
+}
